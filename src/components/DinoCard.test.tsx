@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vitest } from "vitest";
 import { DinoCard } from "./DinoCard";
 import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
@@ -19,4 +19,16 @@ test("renders with provided content", async () => {
     .toBeVisible();
   const img = getByRole("presentation").element() as HTMLImageElement;
   await expect(img.src).toBe("https://example.com/trex.png");
+});
+
+test("fires onRelease callback when release button clicked", async () => {
+  const handleRelease = vitest.fn();
+  const { getByRole } = render(
+    <DinoCard {...dino} onRelease={handleRelease} />
+  );
+  const button = getByRole("button", { name: /release/i });
+  await expect.element(button).toBeVisible();
+  await button.click({ timeout: 1000 });
+
+  expect(handleRelease).toHaveBeenCalledTimes(1);
 });
