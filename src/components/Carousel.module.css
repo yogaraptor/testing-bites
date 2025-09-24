@@ -9,7 +9,8 @@
 }
 
 /* Scroll container */
-.carouselScrollContainer {
+.carouselScrollContainer,
+.carouselScrollContainerCssOnly {
   display: flex;
   width: 100%;
   height: 100%;
@@ -24,6 +25,29 @@
 /* Hide scrollbar for WebKit browsers */
 .carouselScrollContainer::-webkit-scrollbar {
   display: none;
+}
+
+/* Css scroll-buttons for css-only carousel */
+.carouselScrollContainerCssOnly {
+  &::scroll-button(left) {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "⬅" / "Scroll Left";
+  }
+
+  &::scroll-button(right) {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "⮕" / "Scroll Right";
+  }
+
+  &::scroll-button(*):focus-visible {
+    outline-offset: 5px;
+  }
 }
 
 /* Individual carousel item */
@@ -42,4 +66,25 @@
   .carouselScrollContainer {
     scroll-behavior: auto;
   }
+}
+
+.carouselButtonLeft,
+.carouselButtonRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carouselButtonLeft {
+  left: 10px;
+}
+
+.carouselButtonRight {
+  right: 10px;
 }

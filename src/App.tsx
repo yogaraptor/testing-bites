@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { CssScrollSnapCarousel, JsScrollCarousel } from "./components/Carousel";
+import { CssOnlyCarousel, CssWithJsCarousel } from "./components/Carousel";
 import { DinoCard } from "./components/DinoCard";
 
 function App() {
@@ -22,14 +22,14 @@ function App() {
       />
 
       <h1>Carousels</h1>
-      <JsScrollCarousel>
+      <CssWithJsCarousel>
         <div>Slide 1</div>
         <div>Slide 2</div>
         <div>Slide 3</div>
         <div>Slide 4</div>
-      </JsScrollCarousel>
+      </CssWithJsCarousel>
 
-      <CssScrollSnapCarousel>
+      <CssOnlyCarousel>
         <div>
           <DinoCard
             name="Yogaraptor"
@@ -58,7 +58,7 @@ function App() {
             description="A small, fast dinosaur."
           />
         </div>
-      </CssScrollSnapCarousel>
+      </CssOnlyCarousel>
     </div>
   );
 }
