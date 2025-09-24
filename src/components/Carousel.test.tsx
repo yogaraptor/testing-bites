@@ -3,52 +3,48 @@ import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
 import { CssScrollSnapCarousel, JsScrollCarousel } from "./Carousel";
 
-const sampleItems = [
-  { id: 1, color: "bg-red-500", title: "Slide 1" },
-  { id: 2, color: "bg-blue-500", title: "Slide 2" },
-  { id: 3, color: "bg-green-500", title: "Slide 3" },
-  { id: 4, color: "bg-yellow-500", title: "Slide 4" },
-];
-
 const renderCssCarousel = () =>
   render(
     <CssScrollSnapCarousel>
-      <div>Slide 1</div>
-      <div>Slide 2</div>
-      <div>Slide 3</div>
-      <div>Slide 4</div>
+      <div>Yogaraptor</div>
+      <div>Chillodactyl</div>
+      <div>Calmodon</div>
     </CssScrollSnapCarousel>
   );
 
 const renderJsCarousel = () =>
   render(
     <JsScrollCarousel>
-      <div>Slide 1</div>
-      <div>Slide 2</div>
-      <div>Slide 3</div>
-      <div>Slide 4</div>
+      <div>Yogaraptor</div>
+      <div>Chillodactyl</div>
+      <div>Calmodon</div>
     </JsScrollCarousel>
   );
 
 test("renders slides", async () => {
   const { getByText } = renderCssCarousel();
-  await expect.element(getByText("Slide 1")).toBeInTheDocument();
-  await expect.element(getByText("Slide 2")).toBeInTheDocument();
-  await expect.element(getByText("Slide 3")).toBeInTheDocument();
-  await expect.element(getByText("Slide 4")).toBeInTheDocument();
+  await expect.element(getByText("Yogaraptor")).toBeInTheDocument();
+  await expect.element(getByText("Chillodactyl")).toBeInTheDocument();
+  await expect.element(getByText("Calmodon")).toBeInTheDocument();
 });
 
 test("scrolls one slide at a time", async () => {
-  // renderCssCarousel();
-  renderJsCarousel();
+  renderCssCarousel();
+  // renderJsCarousel();
   const targetElement = page.getByTestId("carousel-scroll-container").element();
 
-  await expect.element(page.getByText("Slide 1")).toBeInViewport();
-  await expect.element(page.getByText("Slide 2")).not.toBeInViewport();
+  await expect.element(page.getByText("Yogaraptor")).toBeInViewport();
+  await expect.element(page.getByText("Chillodactyl")).not.toBeInViewport();
 
   targetElement!.scrollBy(300, 0);
 
-  await new Promise((r) => setTimeout(r, 500)); // wait for scroll to settle
+  await expect
+    .element(page.getByText("Chillodactyl"), { timeout: 1000 })
+    .toBeInViewport();
 
-  await expect.element(page.getByText("Slide 2")).toBeInViewport();
+  targetElement!.scrollBy(300, 0);
+
+  await expect
+    .element(page.getByText("Calmodon"), { timeout: 1000 })
+    .toBeInViewport();
 });
