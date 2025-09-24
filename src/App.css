@@ -3,6 +3,12 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: Nunito, sans-serif;
+}
+
+h1,
+h2 {
+  font-weight: bold;
 }
 
 .logo {
