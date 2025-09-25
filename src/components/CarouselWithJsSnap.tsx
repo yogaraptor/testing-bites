@@ -1,32 +1,8 @@
 import React, { type PropsWithChildren } from "react";
 import styles from "./Carousel.module.css";
+import { CarouselItem } from "./CarouselItem";
 
-const CarouselItem = ({
-  children,
-  className = "",
-}: PropsWithChildren<{ className?: string }>) => (
-  <div className={`${styles.carouselItem} ${className}`}>{children}</div>
-);
-
-export const CssScrollSnapCarousel = ({ children }: PropsWithChildren) => {
-  return (
-    <div className={styles.carouselRoot} data-testid="css-carousel">
-      <div
-        className={styles.carouselScrollContainer}
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        data-testid="carousel-scroll-container"
-      >
-        {React.Children.map(children, (child, index) => (
-          <CarouselItem key={index} className={styles.carouselItem}>
-            {child}
-          </CarouselItem>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export const JsScrollCarousel = ({ children }: PropsWithChildren) => {
+export const CarouselWithJsSnap = ({ children }: PropsWithChildren) => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const isScrollingRef = React.useRef(false);
   const scrollTimeoutRef = React.useRef<number | null>(null);
@@ -100,3 +76,5 @@ export const JsScrollCarousel = ({ children }: PropsWithChildren) => {
     </div>
   );
 };
+
+export default CarouselWithJsSnap;

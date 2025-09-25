@@ -1,5 +1,6 @@
 import "./App.css";
-import { CssScrollSnapCarousel, JsScrollCarousel } from "./components/Carousel";
+import CarouselWithCssSnap from "./components/CarouselWithCssSnap";
+import CarouselWithJsSnap from "./components/CarouselWithJsSnap";
 import { DinoCard } from "./components/DinoCard";
 import yogaraptorIcon from "./assets/yogaraptor-icon.png";
 import chillodactylIcon from "./assets/chillodactyl-icon.png";
@@ -21,22 +22,18 @@ const Slide = ({ children }) => (
 
 function App() {
   return (
-    <div
-      style={{
-        height: "100vh",
-      }}
-    >
-      {/* <h1>Cards</h1>
+    <div>
+      <h1>Cards</h1>
       <DinoCard
         name="Yogaraptor"
         image="https://example.com/yogaraptor.png"
         description="A small, agile dinosaur."
         onRelease={() => alert("Yogaraptor released!")}
-      /> */}
+      />
 
       <h1>Dino Carousels</h1>
       <h2>Scroll snap via JS</h2>
-      <JsScrollCarousel>
+      <CarouselWithJsSnap>
         <Slide>
           <img alt="" src={yogaraptorIcon} />
           Yogaraptor
@@ -49,10 +46,10 @@ function App() {
           <img alt="" src={tricalmotopsIcon} />
           Tricalmatops
         </Slide>
-      </JsScrollCarousel>
+      </CarouselWithJsSnap>
 
       <h2>Scroll snap via CSS</h2>
-      <CssScrollSnapCarousel>
+      <CarouselWithCssSnap>
         <Slide>
           <img alt="" src={yogaraptorIcon} />
           Yogaraptor
@@ -65,7 +62,7 @@ function App() {
           <img alt="" src={tricalmotopsIcon} />
           Tricalmatops
         </Slide>
-      </CssScrollSnapCarousel>
+      </CarouselWithCssSnap>
     </div>
   );
 }

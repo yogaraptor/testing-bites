@@ -1,40 +1,32 @@
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
-import { CssScrollSnapCarousel, JsScrollCarousel } from "./Carousel";
+import Carousel from "./CarouselWithJsSnap";
 
-const renderCssCarousel = () =>
+const renderCarousel = () =>
   render(
-    <CssScrollSnapCarousel>
+    <Carousel>
       <div>Yogaraptor</div>
       <div>Chillodactyl</div>
-      <div>Calmodon</div>
-    </CssScrollSnapCarousel>
-  );
-
-const renderJsCarousel = () =>
-  render(
-    <JsScrollCarousel>
-      <div>Yogaraptor</div>
-      <div>Chillodactyl</div>
-      <div>Calmodon</div>
-    </JsScrollCarousel>
+      <div>Tricalmatops</div>
+    </Carousel>
   );
 
 test("renders slides", async () => {
-  const { getByText } = renderCssCarousel();
+  const { getByText } = renderCarousel();
   await expect.element(getByText("Yogaraptor")).toBeInTheDocument();
   await expect.element(getByText("Chillodactyl")).toBeInTheDocument();
-  await expect.element(getByText("Calmodon")).toBeInTheDocument();
+  await expect.element(getByText("Tricalmatops")).toBeInTheDocument();
 });
 
 test("scrolls one slide at a time", async () => {
-  renderCssCarousel();
-  // renderJsCarousel();
+  renderCarousel();
+
   const targetElement = page.getByTestId("carousel-scroll-container").element();
 
   await expect.element(page.getByText("Yogaraptor")).toBeInViewport();
   await expect.element(page.getByText("Chillodactyl")).not.toBeInViewport();
+  await expect.element(page.getByText("Tricalmatops")).not.toBeInViewport();
 
   targetElement!.scrollBy(300, 0);
 
@@ -45,6 +37,6 @@ test("scrolls one slide at a time", async () => {
   targetElement!.scrollBy(300, 0);
 
   await expect
-    .element(page.getByText("Calmodon"), { timeout: 1000 })
+    .element(page.getByText("Tricalmatops"), { timeout: 1000 })
     .toBeInViewport();
 });
