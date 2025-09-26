@@ -1,7 +1,8 @@
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
-import Carousel from "./CarouselWithJsSnap";
+// import Carousel from "./CarouselWithJsSnap";
+import Carousel from "./CarouselWithCssSnap";
 
 const renderCarousel = () =>
   render(
@@ -22,19 +23,20 @@ test("renders slides", async () => {
 test("scrolls one slide at a time", async () => {
   renderCarousel();
 
-  const targetElement = page.getByTestId("carousel-scroll-container").element();
+  const scrollArea = page.getByTestId("carousel-scroll-container").element();
+  expect(scrollArea).toBeInTheDocument();
 
   await expect.element(page.getByText("Yogaraptor")).toBeInViewport();
   await expect.element(page.getByText("Chillodactyl")).not.toBeInViewport();
   await expect.element(page.getByText("Tricalmatops")).not.toBeInViewport();
 
-  targetElement!.scrollBy(300, 0);
+  scrollArea.scrollBy(300, 0);
 
   await expect
     .element(page.getByText("Chillodactyl"), { timeout: 1000 })
     .toBeInViewport();
 
-  targetElement!.scrollBy(300, 0);
+  scrollArea.scrollBy(300, 0);
 
   await expect
     .element(page.getByText("Tricalmatops"), { timeout: 1000 })
