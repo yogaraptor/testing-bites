@@ -18,10 +18,12 @@ Why is this cool? Because in a traditional JSDOM-based test, even though removin
 
 ### Carousel example
 
-The two components exported from `components/Carousel.tsx` implement the same basic component - a scrollable container that snaps to the boundaries of its children to create a very simple carousel. One uses some fairly involved JavaScript to manage the snapping, while the other uses a fantastic recent addition to the CSS spec, [CSS scroll snap](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap).
+The two components exported from `components/CarouselWithJsSnap.tsx` and `components/CarouselWithCssSnap.tsx` implement the same basic component - a scrollable container that snaps to the boundaries of its children to create a very simple carousel. One uses some fairly involved JavaScript to manage the snapping, while the other uses a fantastic recent addition to the CSS spec, [CSS scroll snap](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap).
 
-The test file for these components runs the exact same test against both. Because we're rendering in the browser, our test can focus on user interactions and visibility of elements, and is not coupled at all to the implementation of either component. The test doesn't know or care _how_ the carousel snaps to each item, it just asserts that the snapping occurs.
+The test file for these components runs the exact same test against both. Because we're rendering in the browser, our test can focus on user interactions and visibility of elements, and is not coupled at all to the implementation of either component. The test doesn't know or care _how_ the carousel snaps to each item, it just asserts that the snapping occurs. The key matcher in this case is [toBeInViewport](https://main.vitest.dev/guide/browser/assertion-api.html#tobeinviewport) (currently only available in v4 beta of vitest, 🤞 for that release coming soon!)
 
 This is a somewhat contrived example of course, but does demonstrate that browser-based testing paves the way for simpler, more robust tests that can survive extreme refactors, while still failing when the behaviour the user cares about breaks.
 
-(I would have liked to use some sort of swipe gesture to scroll each carousel, but Playwright has paused development on touch events, and vitest doesn't expose them at all).
+Writing a test for the JS-snapping carousel using, say, `@testing-library/react` would involve lots of mocking of `Element#clientWidth`, `Element#scrollWidth`, etc, since JSDOM doesn't support layout. The test would be completely coupled to the specific implementation of the carousel, rendering it brittle and of limited value. Using vitest browser mode, however, the only tiny bit of coupling we need do is expose a test ID for the scrollable area, as we can't reliably select that using text or other indicators.
+
+(I would have liked to demonstrate this with a more full-featured carousel using the new [CSS5 scroll-buttons feature](https://developer.chrome.com/blog/carousels-with-css), but Playwright and therefore vitest is unable to select psuedo-elements. Maybe one day!)
