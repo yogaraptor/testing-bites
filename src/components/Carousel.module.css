@@ -1,8 +1,9 @@
 /* Carousel root container */
 .carouselRoot {
   position: relative;
+  margin: 1rem;
   width: 20rem;
-  height: 200px;
+  height: 12rem;
   overflow: hidden;
   border-radius: 8px;
   background-color: #c8b7b7;
