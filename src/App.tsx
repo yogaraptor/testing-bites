@@ -2,6 +2,7 @@ import "./App.css";
 import CarouselWithCssSnap from "./components/CarouselWithCssSnap";
 import CarouselWithJsSnap from "./components/CarouselWithJsSnap";
 import { DinoCard } from "./components/DinoCard";
+import yogaraptorLogo from "./assets/logo.avif";
 import yogaraptorIcon from "./assets/yogaraptor-icon.png";
 import chillodactylIcon from "./assets/chillodactyl-icon.png";
 import tricalmotopsIcon from "./assets/tricalmotops-icon.png";
@@ -26,7 +27,7 @@ function App() {
       <h1>Cards</h1>
       <DinoCard
         name="Yogaraptor"
-        image="https://example.com/yogaraptor.png"
+        image={yogaraptorLogo}
         description="A small, agile dinosaur."
         onRelease={() => alert("Yogaraptor released!")}
       />

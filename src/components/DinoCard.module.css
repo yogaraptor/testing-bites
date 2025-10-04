@@ -12,6 +12,16 @@
   border-radius: 0.5rem;
   z-index: 0;
 
+  h1 {
+    text-transform: lowercase;
+    font-size: 2rem;
+  }
+
+  img {
+    max-width: 12rem;
+    margin: 0 auto;
+  }
+
   &::after {
     content: "";
     position: absolute;
