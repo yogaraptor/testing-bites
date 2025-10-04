@@ -28,7 +28,7 @@ function App() {
       <DinoCard
         name="Yogaraptor"
         image={yogaraptorLogo}
-        description="A small, agile dinosaur."
+        description="The chillest creature in the Cretaceous."
         onRelease={() => alert("Yogaraptor released!")}
       />
 
