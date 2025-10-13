@@ -6,6 +6,7 @@ import yogaraptorLogo from "./assets/logo.avif";
 import yogaraptorIcon from "./assets/yogaraptor-icon.png";
 import chillodactylIcon from "./assets/chillodactyl-icon.png";
 import tricalmotopsIcon from "./assets/tricalmotops-icon.png";
+import { DinoTeamBuilder } from "./components/DinoTeamBuilder";
 
 const Slide = ({ children }) => (
   <div
@@ -64,6 +65,9 @@ function App() {
           Tricalmatops
         </Slide>
       </CarouselWithCssSnap>
+
+      <h1>Dino Team Builder</h1>
+      <DinoTeamBuilder />
     </div>
   );
 }

@@ -27,3 +27,9 @@ This is a somewhat contrived example of course, but does demonstrate that browse
 Writing a test for the JS-snapping carousel using, say, `@testing-library/react` would involve lots of mocking of `Element#clientWidth`, `Element#scrollWidth`, etc, since JSDOM doesn't support layout. The test would be completely coupled to the specific implementation of the carousel, rendering it brittle and of limited value. Using vitest browser mode, however, the only tiny bit of coupling we need do is expose a test ID for the scrollable area, as we can't reliably select that using text or other indicators.
 
 (I would have liked to demonstrate this with a more full-featured carousel using the new [CSS5 scroll-buttons feature](https://developer.chrome.com/blog/carousels-with-css), but Playwright and therefore vitest is unable to select psuedo-elements. Maybe one day!)
+
+### Testing the [Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
+
+Despite [some valiant efforts](https://github.com/jsdom/jsdom/issues/2913), JSDOM doesn't support the Drag and Drop API. But if your tests are running in a browser, no worries!
+
+See a basic example at `components/DinoTeamBuilder.spec.tsx`. The expressive nature of the testing API makes it easy to work test-first with these sorts of components.
