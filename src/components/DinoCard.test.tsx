@@ -4,21 +4,21 @@ import { render } from "vitest-browser-react";
 import { page } from "@vitest/browser/context";
 
 const dino = {
-  name: "Tyrannosaurus Rex",
-  image: "https://example.com/trex.png",
-  description: "A large carnivorous dinosaur.",
+  name: "Yogaraptor",
+  image: "http://localhost/yogaraptor.png",
+  description: "The chillest creature in the Cretaceous!",
 };
 
 test("renders with provided content", async () => {
   const { getByRole, getByText } = render(<DinoCard {...dino} />);
   await expect
-    .element(getByRole("heading", { name: "Tyrannosaurus Rex" }))
+    .element(getByRole("heading", { name: "Yogaraptor" }))
     .toBeVisible();
   await expect
-    .element(getByText("A large carnivorous dinosaur."))
+    .element(getByText("The chillest creature in the Cretaceous!"))
     .toBeVisible();
   const img = getByRole("presentation").element() as HTMLImageElement;
-  await expect(img.src).toBe("https://example.com/trex.png");
+  await expect(img.src).toBe("http://localhost/yogaraptor.png");
 });
 
 test("fires onRelease callback when release button clicked", async () => {
