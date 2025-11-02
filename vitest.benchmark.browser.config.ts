@@ -13,5 +13,6 @@ export default defineConfig({
       instances: [{ browser: "firefox" }],
     },
     include: ["src/benchmark-tests/browser/*.test.{ts,tsx}"],
+    watch: false,
   },
 });
