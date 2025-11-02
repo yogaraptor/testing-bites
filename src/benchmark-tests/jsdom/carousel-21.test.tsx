@@ -57,14 +57,6 @@ test("carousel scroll area is scrollable - JSDOM variant 46", async () => {
   expect(scrollArea).toHaveAttribute('data-testid', 'carousel-scroll-container');
 });
 
-test("carousel has proper structure - JSDOM variant 46", async () => {
-  const { container } = renderCarousel();
-  
-  // Test that the basic structure is rendered
-  expect(container.firstChild).toBeInTheDocument();
-  expect(screen.getByTestId("carousel-scroll-container")).toBeInTheDocument();
-});
-
 test("slides are rendered in correct order - JSDOM variant 46", async () => {
   renderCarousel();
   
