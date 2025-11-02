@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:browser": "vitest --config=vitest.browser.config.ts"
+    "test:browser": "vitest --config=vitest.browser.config.ts",
+    "test:benchmark:browser": "vitest --config=vitest.benchmark-browser.config.ts"
   },
   "dependencies": {
     "react": "^19.1.1",

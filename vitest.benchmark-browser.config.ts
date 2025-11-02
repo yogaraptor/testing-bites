@@ -8,9 +8,10 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: playwright(),
+      headless: true,
       // https://vitest.dev/guide/browser/playwright
       instances: [{ browser: "firefox" }],
     },
-    exclude: ["src/benchmark-tests/**/*.test.{ts,tsx}"],
+    include: ["src/benchmark-tests/browser/*.test.{ts,tsx}"],
   },
 });
