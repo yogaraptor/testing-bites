@@ -1,4 +1,4 @@
-<img alt="" src="https://yogaraptor.dev/logo.avif" height="100" />
+<img alt="" src="https://github.com/user-attachments/assets/844ffe1a-b594-44f1-af2c-b7f850b0a93e" height="100" />
 
 # Yogaraptor's Testing Bites
 
