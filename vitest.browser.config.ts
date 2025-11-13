@@ -11,5 +11,6 @@ export default defineConfig({
       // https://vitest.dev/guide/browser/playwright
       instances: [{ browser: "firefox" }],
     },
+    exclude: ["src/benchmark-tests/**/*.test.{ts,tsx}"],
   },
 });

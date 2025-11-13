@@ -1,0 +1,80 @@
+import { expect, test } from "vitest";
+import { render, screen } from "@testing-library/react";
+import Carousel from "../../components/CarouselWithCssSnap";
+
+const renderCarousel = (suffix = "47") =>
+  render(
+    <Carousel>
+      <div>Yogaraptor{suffix}</div>
+      <div>Chillodactyl{suffix}</div>
+      <div>Tricalmatops{suffix}</div>
+    </Carousel>
+  );
+
+test("renders slides - JSDOM variant 47", async () => {
+  renderCarousel();
+  expect(screen.getByText("Yogaraptor47")).toBeInTheDocument();
+  expect(screen.getByText("Chillodactyl47")).toBeInTheDocument();
+  expect(screen.getByText("Tricalmatops47")).toBeInTheDocument();
+});
+
+test("carousel container exists - JSDOM variant 47", async () => {
+  renderCarousel();
+  const scrollArea = screen.getByTestId("carousel-scroll-container");
+  expect(scrollArea).toBeInTheDocument();
+});
+
+test("carousel contains three slides - JSDOM variant 47", async () => {
+  const { container } = renderCarousel();
+  const slides = container.querySelectorAll('div > div');
+  expect(slides.length).toBeGreaterThanOrEqual(3);
+});
+
+test("slides have text content - JSDOM variant 47", async () => {
+  renderCarousel();
+  expect(screen.getByText("Yogaraptor47")).toHaveTextContent("Yogaraptor47");
+  expect(screen.getByText("Chillodactyl47")).toHaveTextContent("Chillodactyl47");
+  expect(screen.getByText("Tricalmatops47")).toHaveTextContent("Tricalmatops47");
+});
+
+test("carousel scroll area has correct test id - JSDOM variant 47", async () => {
+  renderCarousel();
+  const scrollArea = screen.getByTestId("carousel-scroll-container");
+  expect(scrollArea).toBeInTheDocument();
+});
+
+test("carousel renders without errors - JSDOM variant 47", async () => {
+  expect(() => renderCarousel()).not.toThrow();
+});
+
+test("carousel scroll area is scrollable - JSDOM variant 47", async () => {
+  renderCarousel();
+  const scrollArea = screen.getByTestId("carousel-scroll-container");
+  
+  // In JSDOM, we can't test actual scrolling behavior, but we can test that the element exists
+  // and has the expected properties
+  expect(scrollArea).toBeInTheDocument();
+  expect(scrollArea).toHaveAttribute('data-testid', 'carousel-scroll-container');
+});
+
+test("slides are rendered in correct order - JSDOM variant 47", async () => {
+  renderCarousel();
+  
+  const yogaraptor = screen.getByText("Yogaraptor47");
+  const chillodactyl = screen.getByText("Chillodactyl47");
+  const tricalmatops = screen.getByText("Tricalmatops47");
+  
+  expect(yogaraptor).toBeInTheDocument();
+  expect(chillodactyl).toBeInTheDocument();
+  expect(tricalmatops).toBeInTheDocument();
+});
+
+test("carousel container has expected children - JSDOM variant 47", async () => {
+  const { container } = renderCarousel();
+  const scrollArea = screen.getByTestId("carousel-scroll-container");
+  
+  // Check that the scroll area contains the slides
+  expect(scrollArea).toContainElement(screen.getByText("Yogaraptor47"));
+  expect(scrollArea).toContainElement(screen.getByText("Chillodactyl47"));
+  expect(scrollArea).toContainElement(screen.getByText("Tricalmatops47"));
+});

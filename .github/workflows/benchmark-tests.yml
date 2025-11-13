@@ -1,0 +1,49 @@
+name: Simple Test Run
+
+on:
+  push:
+    branches: [ main, benchmarking ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-jsdom:
+    runs-on: ubuntu-latest
+    name: JSDOM Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run JSDOM benchmark tests
+      run: npm run test:benchmark:jsdom -- --run
+
+  test-browser:
+    runs-on: ubuntu-latest
+    name: Browser Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright
+      run: npx playwright install firefox
+    
+    - name: Run browser benchmark tests
+      run: npm run test:benchmark:browser -- --run
